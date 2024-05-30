@@ -40,21 +40,45 @@ public class GestionMascotas{
 	}
 	
 	public void actualizarMascota(Mascota mascota) throws Exception {
-		Mascota cli = daoMascota.read(mascota.getCodigo_mascota());
-		if (cli != null){
-			daoMascota.update(mascota);
-		}else {
-			throw new Exception("Mascota no existe");
-		}
+		Span span = tracer.buildSpan("actualizarMascota").start();
+        try (Scope scope = tracer.scopeManager().activate(span)) {
+            Mascota cli = daoMascota.read(mascota.getCodigo_mascota());
+            if (cli != null) {
+                daoMascota.update(mascota);
+            } else {
+                throw new Exception("Mascota no existe");
+            }
+        } catch (Exception e) {
+            span.log(e.getMessage());
+            throw e;
+        } finally {
+            span.finish();
+        }
 	}
 	
 	
 	public void borrarMascota(int codigo) {
 		
-		daoMascota.remove(codigo); 
+		Span span = tracer.buildSpan("borrarMascota").start();
+        try (Scope scope = tracer.scopeManager().activate(span)) {
+            daoMascota.remove(codigo);
+        } catch (Exception e) {
+            span.log(e.getMessage());
+            throw e;
+        } finally {
+            span.finish();
+        }
 	}
 	
 	public List<Mascota> getMascotas(){
-		return daoMascota.getAll();
+		Span span = tracer.buildSpan("getMascotas").start();
+        try (Scope scope = tracer.scopeManager().activate(span)) {
+            return daoMascota.getAll();
+        } catch (Exception e) {
+            span.log(e.getMessage());
+            throw e;
+        } finally {
+            span.finish();
+        }
 	}
 }
