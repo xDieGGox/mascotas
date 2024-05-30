@@ -1,0 +1,10 @@
+mascotas\mascotas\services\PathBase.class
+mascotas\mascotas\dao\MascotaDAO.class
+mascotas\mascotas\services\CORSFilter.class
+mascotas\mascotas\services\ErrorMessage.class
+mascotas\mascotas\business\GestionDatos.class
+mascotas\mascotas\config\JaegerContextListener.class
+mascotas\mascotas\config\JaegerConfig.class
+mascotas\mascotas\business\GestionMascotas.class
+mascotas\mascotas\model\Mascota.class
+mascotas\mascotas\services\MascotasServices.class
